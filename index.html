@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page.title">John Smith | Personal Website</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS VARIABLES & RESET */
+        :root {
+            --base-color: #fdfaf5;
+            --color-1: #f3eee4;
+            --color-2: #e8e2d4;
+            --text-color: #333333;
+            --accent-color: #d4a373;
+            --secondary-accent: #faedcd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--base-color);
+            padding: 1em;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Merriweather', serif;
+        }
+
+        /* NAVIGATION */
+        nav {
+            max-width: 1000px;
+            margin: 2em auto;
+            width: min(1000px, 100%);
+        }
+
+        nav ul {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 2em;
+        }
+
+        nav li:first-child {
+            margin-right: auto;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        .lang-button {
+            border: 1px solid transparent;
+            background: transparent;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.2em 0.4em;
+            border-radius: 0.4em;
+            line-height: 1;
+        }
+
+        .lang-button[aria-pressed="true"] {
+            border-color: var(--accent-color);
+            background-color: var(--secondary-accent);
+        }
+
+        /* DATE HIGHLIGHT */
+        .date-highlight {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.2em 0.6em;
+            border-radius: 0.3em;
+            font-weight: 600;
+            display: inline-block;
+            margin-right: 0.5em;
+        }
+
+        /* NEWS ITEMS */
+        .news-item {
+            margin-bottom: 1.5em;
+            padding: 1em;
+            background-color: var(--color-2);
+            border-radius: 0.8em;
+        }
+
+        .news-item p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* LAYOUT SECTIONS */
+        header, section {
+            max-width: 75em;
+            margin: 2em auto;
+            padding: 3em 2em;
+            background-color: var(--color-1);
+            border-radius: 1.5em;
+        }
+
+        #about {
+            padding: 4em 3em;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3em;
+        }
+
+        .text-container {
+            flex: 0 1 34em;
+        }
+
+        .text-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5em;
+        }
+
+        .text-container h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5em;
+        }
+
+        .text-container p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2em;
+        }
+
+        .profile-img {
+            max-width: 100%;
+            border-radius: 1em;
+            height: 300px;
+            width: 300px;
+            object-fit: cover;
+            flex: 0 0 auto;
+            margin: 0 auto;
+        }
+
+        header img {
+            max-width: 100%;
+            border-radius: 1em;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* BUTTONS */
+        .cta-button {
+            display: inline-block;
+            padding: 1em 2em;
+            text-decoration: none;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 0.5em;
+            font-weight: 600;
+            margin-right: 1em;
+        }
+
+        .cta-button.secondary {
+            background-color: var(--secondary-accent);
+            color: var(--text-color);
+        }
+
+        /* GRID GALLERY */
+        #mywork {
+            background-color: var(--color-2);
+            text-align: center;
+        }
+
+        .grid-container {
+            display: grid;
+            width: 100%;
+            gap: 1em;
+            margin: 2em 0;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 400px); /* Fixed height for demo */
+            grid-template-areas: 
+                "img1 img1 img2 img3"
+                "img1 img1 img4 img5";
+        }
+
+        .grid-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 1em;
+            transition: transform 0.3s ease;
+        }
+
+        .grid-container img:hover {
+            transform: scale(1.02);
+        }
+
+        /* FAQ ACCORDION */
+        details {
+            background-color: var(--base-color);
+            margin-top: 1em;
+            border-radius: 1em;
+            padding: 1.5em;
+            text-align: left;
+        }
+
+        summary {
+            font-family: 'Merriweather', serif;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 4em 0;
+        }
+
+        footer a {
+            margin: 0 1em;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        /* RESPONSIVENESS */
+        @media (max-width: 988px) {
+            .flex-container {
+                text-align: center;
+            }
+            .grid-container {
+                grid-template-rows: repeat(2, 250px);
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav ul { gap: 1em; }
+            nav li:not(:first-child):not(:last-child) { display: none; }
+            
+            .grid-container {
+                display: flex;
+                flex-direction: column;
+            }
+            .grid-container img {
+                height: 300px;
+            }
+            .cta-button {
+                width: 100%;
+                margin: 0.5em 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Berk Anbaroğlu</a></li>
+            <li><a href="about.html" data-i18n="nav.about">About</a></li>
+            <li><a href="publications.html" data-i18n="nav.research">Publications</a></li>
+            <li><a href="courses.html" data-i18n="nav.teaching">Teaching</a></li>
+            <li><a href="mailto:hello@example.com" data-i18n="nav.contact">Contact</a></li>
+            <li>
+                <div class="lang-switcher" aria-label="Language">
+                    <button type="button" class="lang-button" data-lang="en" aria-pressed="false" title="English">🇬🇧</button>
+                    <button type="button" class="lang-button" data-lang="tr" aria-pressed="false" title="Türkçe">🇹🇷</button>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <section id="about">
+        <div class="flex-container">
+            <img src="images/profil_foto.jpg" alt="Profile" class="profile-img">
+            <div class="text-container">
+                <h2 data-i18n="intro.title">Profile</h2>
+                <p data-i18n="intro.text">I am an assistant professor in the Department of Geomatics Engineering at Hacettepe University, Ankara, Turkey. My research interests are broadly in the analysis of data involving spatial and temporal domains. Specifically, I am interested in developing methods of spatio-temporal data mining and pattern discovery for the purpose of enhancing state-of-the-practice solutions on intelligent transportation systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="news">
+        <h2 data-i18n="news.title">Recent News</h2>
+        <div class="news-item">
+            <span class="date-highlight" data-i18n="news.item1.date">Dec 2020</span>
+            <p data-i18n="news.item1.text">Paper presented at SCA is online: Which Way is Yıldız Amfi? Augmented Reality vs. Paper Map on Pedestrian Wayfinding</p>
+        </div>
+        <div class="news-item">
+            <span class="date-highlight" data-i18n="news.item2.date">Sept 2020</span>
+            <p data-i18n="news.item2.text">Served on the program committee of SCA 2020</p>
+        </div>
+    </section>
+
+    <footer>
+        <a href="#" data-i18n="footer.instagram">Instagram</a>
+        <a href="#" data-i18n="footer.linkedin">LinkedIn</a>
+        <a href="mailto:hello@example.com" data-i18n="footer.contact">Contact Me</a>
+        <p style="margin-top: 2em; opacity: 0.5;" data-i18n="footer.copyright">&copy; 2026 Coding2GO Tutorial Clone</p>
+    </footer>
+
+    <script>
+        const supportedLanguages = ["en", "tr"];
+        const defaultLanguage = "en";
+
+        const translations = {
+            en: {
+                "page.title": "Berk Anbaroğlu | Assistant Professor",
+                "nav.about": "About Me",
+                "nav.research": "Publications",
+                "nav.teaching": "Courses",
+                "nav.contact": "Contact",
+                "intro.title": "Profile",
+                "intro.text": "I am an assistant professor in the Department of Geomatics Engineering at Hacettepe University, Ankara, Turkey. My research interests are broadly in the analysis of data involving spatial and temporal domains. Specifically, I am interested in developing methods of spatio-temporal data mining and pattern discovery for the purpose of enhancing state-of-the-practice solutions on intelligent transportation systems.",
+                "news.title": "Recent News",
+                "news.item1.date": "Dec 2020",
+                "news.item1.text": "Paper presented at SCA is online: Which Way is Yıldız Amfi? Augmented Reality vs. Paper Map on Pedestrian Wayfinding",
+                "news.item2.date": "Sept 2020",
+                "news.item2.text": "Served on the program committee of SCA 2020",
+                "footer.instagram": "Instagram",
+                "footer.linkedin": "LinkedIn",
+                "footer.contact": "Contact Me",
+                "footer.copyright": "© 2026 Academic Profile"
+            },
+            tr: {
+                "page.title": "Berk Anbaroğlu | Yardımcı Doçent",
+                "nav.about": "Hakkımda",
+                "nav.research": "Yayınlar",
+                "nav.teaching": "Dersler",
+                "nav.contact": "İletişim",
+                "intro.title": "Profil",
+                "intro.text": "Hacettepe Üniversitesi Jeomatik Mühendisliği Bölümü'nde yardımcı doçent olarak görev yapmaktayım. Araştırma ilgi alanlarım genel olarak mekansal ve zamansal alanları içeren veri analizi üzerinedir. Özellikle, akıllı ulaştırma sistemleri üzerinde pratik çözümleri geliştirmek amacıyla spatio-temporal veri madenciliği ve örüntü keşif yöntemleri geliştirmekle ilgileniyorum.",
+                "news.title": "Son Haberler",
+                "news.item1.date": "Aralık 2020",
+                "news.item1.text": "SCA'da sunulan makale yayınlandı: Which Way is Yıldız Amfi? Augmented Reality vs. Paper Map on Pedestrian Wayfinding",
+                "news.item2.date": "Eylül 2020",
+                "news.item2.text": "SCA 2020 programı komitesinde görev yaptı",
+                "footer.instagram": "Instagram",
+                "footer.linkedin": "LinkedIn",
+                "footer.contact": "Bana Ulaşın",
+                "footer.copyright": "© 2026 Akademik Profil"
+            }
+        };
+
+        const getLanguageFromQuery = () => {
+            const params = new URLSearchParams(window.location.search);
+            const lang = params.get("lang");
+            return lang && supportedLanguages.includes(lang) ? lang : null;
+        };
+
+        const getPreferredLanguage = () => {
+            const queryLang = getLanguageFromQuery();
+            if (queryLang) {
+                return queryLang;
+            }
+
+            const storedLang = localStorage.getItem("preferredLanguage");
+            if (storedLang && supportedLanguages.includes(storedLang)) {
+                return storedLang;
+            }
+
+            const browserLang = navigator.language?.slice(0, 2);
+            return supportedLanguages.includes(browserLang) ? browserLang : defaultLanguage;
+        };
+
+        const applyTranslations = (messages) => {
+            document.querySelectorAll("[data-i18n]").forEach((element) => {
+                const key = element.getAttribute("data-i18n");
+                if (messages[key]) {
+                    if (element.hasAttribute("data-i18n-attr")) {
+                        const attrName = element.getAttribute("data-i18n-attr");
+                        element.setAttribute(attrName, messages[key]);
+                    } else {
+                        element.textContent = messages[key];
+                    }
+                }
+            });
+
+            document.querySelectorAll("[data-i18n-html]").forEach((element) => {
+                const key = element.getAttribute("data-i18n-html");
+                if (messages[key]) {
+                    element.innerHTML = messages[key];
+                }
+            });
+
+            if (messages["page.title"]) {
+                document.title = messages["page.title"];
+            }
+        };
+
+        const setLanguage = (language) => {
+            const lang = supportedLanguages.includes(language) ? language : defaultLanguage;
+            document.documentElement.lang = lang;
+            localStorage.setItem("preferredLanguage", lang);
+
+            if (translations[lang]) {
+                applyTranslations(translations[lang]);
+            }
+        };
+
+        const initialLanguage = getPreferredLanguage();
+        const langButtons = document.querySelectorAll(".lang-button");
+        const updateLangButtons = (activeLang) => {
+            langButtons.forEach((button) => {
+                const isActive = button.dataset.lang === activeLang;
+                button.setAttribute("aria-pressed", isActive ? "true" : "false");
+            });
+        };
+
+        langButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const lang = button.dataset.lang;
+                setLanguage(lang);
+                updateLangButtons(lang);
+                const params = new URLSearchParams(window.location.search);
+                params.set("lang", lang);
+                window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+            });
+        });
+
+        updateLangButtons(initialLanguage);
+
+        setLanguage(initialLanguage);
+    </script>
+
+</body>
+</html>
